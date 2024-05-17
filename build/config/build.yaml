@@ -18,7 +18,7 @@ steps:
 # Build the runtime container
 - name: 'gcr.io/cloud-builders/docker'
   id: 'DOCKER_BUILD'
-  args: ['build', '--tag=${_IMAGE}', '--no-cache', 'jetty9/target/docker']
+  args: ['build', '--tag=${_IMAGE}', '--no-cache', 'jetty12/target/docker']
 
 # Build the structure test image
 - name: 'gcr.io/cloud-builders/docker'

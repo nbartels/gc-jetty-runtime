@@ -1,0 +1,4 @@
+--create-start-d
+--approve-all-licenses
+--add-modules=server,ee8-webapp,http,ee8-deploy,ee8-jsp,ee8-jstl,resources,logging-jul,logging-jcl-capture
+

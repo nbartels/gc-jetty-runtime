@@ -37,7 +37,7 @@ To update the server configuration in a derived Docker image, the `Dockerfile` m
 enable additional modules with `RUN` commands like:
 ```dockerfile
 WORKDIR $JETTY_BASE
-RUN java -jar "$JETTY_HOME/start.jar" --add-to-startd=jmx,stats
+RUN java -jar "$JETTY_HOME/start.jar" --add-modules=jmx,stats
 ```
 Modules may be configured in a `Dockerfile` by editing the properties in the corresponding mod files in `/var/lib/jetty/start.d/` or the module can be deactivated by removing that file.
 
@@ -354,8 +354,8 @@ Example Dockerfile:
 
 ```Dockerfile
 FROM gcr.io/google-appengine/jetty
-RUN java -jar "$JETTY_HOME/start.jar" --create-startd
-RUN java -jar "$JETTY_HOME/start.jar" --add-to-start=webapp,deploy,http,openid
+RUN java -jar "$JETTY_HOME/start.jar" --create-start-d
+RUN java -jar "$JETTY_HOME/start.jar" --add-modules=webapp,deploy,http,openid
 COPY openid.ini $JETTY_BASE/start.d/
 COPY openid-webapp.war $JETTY_BASE/webapps/
 ```
