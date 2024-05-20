@@ -34,8 +34,8 @@
     <jetty12.dot.version>9</jetty12.dot.version>
     <jetty12.version>12.${jetty12.minor.version}.${jetty12.dot.version}</jetty12.version>
     <docker.tag.prefix>ee8-</docker.tag.prefix>
-    <docker.tag.short>${docker.tag.prefix}12.${jetty12.minor.version}</docker.tag.short>
-    <docker.tag.long>${docker.tag.prefix}12.${jetty12.minor.version}-${maven.build.timestamp}</docker.tag.long>
+    <docker.tag.short>${docker.tag.prefix}${jetty12.version}</docker.tag.short>
+    <docker.tag.long>${docker.tag.prefix}${jetty12.version}-${maven.build.timestamp}</docker.tag.long>
     <docker.openjdk.image>openjdk:21-slim-bookworm</docker.openjdk.image>
   </properties>
 

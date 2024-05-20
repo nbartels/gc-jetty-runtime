@@ -13,7 +13,7 @@ cat <<EOF > ${KOKORO_GITHUB_DIR}/${SAMPLE_APP_DIRECTORY}/app.yaml
 runtime: java
 env: flex
 runtime_config:
-  server: jetty9
+  server: jetty12
 resources:
   memory_gb: 2.5
 EOF

@@ -31,7 +31,7 @@ steps:
 # See https://github.com/GoogleContainerTools/container-structure-test
 - name: 'gcr.io/gcp-runtimes/container-structure-test:v1.1.0'
   id: 'STRUCTURE_TEST'
-  args: ['test', '--image', '${_IMAGE}-structure-test', '-v', '--config', 'jetty9/target/test-classes/structure.yaml']
+  args: ['test', '--image', '${_IMAGE}-structure-test', '-v', '--config', 'jetty12/target/test-classes/structure.yaml']
   waitFor: 'DOCKER_BUILD_STRUCTURE_TEST'
 
 # Push the image to a staging repository so it can be used in integration tests
