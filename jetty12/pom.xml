@@ -197,6 +197,22 @@
                     <include>*</include>
                   </includes>
                 </resource>
+                <resource>
+                  <directory>${basedir}/src/main/docker/shutdown</directory>
+                  <targetPath>${project.build.directory}/docker/shutdown</targetPath>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>*</include>
+                  </includes>
+                </resource>
+                <resource>
+                  <directory>${basedir}/src/main/docker/setup-env.d</directory>
+                  <targetPath>${project.build.directory}/docker/setup-env.d</targetPath>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>*</include>
+                  </includes>
+                </resource>
               </resources>
             </configuration>
           </execution>

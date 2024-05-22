@@ -33,15 +33,25 @@ RUN chown -R jetty:jetty $JETTY_HOME
 ENV JETTY_BASE ${jetty.base}
 ENV TMPDIR /tmp/jetty
 ADD jetty-base $JETTY_BASE
-ADD 50-jetty.bash 60-jetty-start.bash /setup-env.d/
+
+ADD https://storage.googleapis.com/cloud-profiler/java/latest/profiler_java_agent.tar.gz /opt/cprof/
+# ADD setup, shutdown and docker-entrypoint
+COPY docker-entrypoint.bash /
+COPY setup-env.d/ /setup-env.d/
+COPY shutdown/ /shutdown/
 ADD quickstart.sh /scripts/jetty/quickstart.sh
 ADD generate-jetty-start.sh /scripts/jetty/generate-jetty-start.sh
+
+RUN tar Cxfvz /opt/cprof /opt/cprof/profiler_java_agent.tar.gz --no-same-owner \
+ && rm /opt/cprof/profiler_java_agent.tar.gz \
+ && chmod +x /docker-entrypoint.bash /shutdown/*.bash /setup-env.d/*.bash \
+ && mkdir /var/log/app_engine \
+ && chmod go+rwx /var/log/app_engine
+
 WORKDIR $JETTY_BASE
 RUN mkdir -p webapps $TMPDIR \
  && java -jar $JETTY_HOME/start.jar --approve-all-licenses --add-modules=setuid \
  && chown -R jetty:jetty $JETTY_BASE $TMPDIR \
- && chmod +x /setup-env.d/50-jetty.bash \
- && chmod +x /setup-env.d/60-jetty-start.bash \
  && chmod +x /scripts/jetty/quickstart.sh \
  && chmod +x /scripts/jetty/generate-jetty-start.sh
 
@@ -56,4 +66,5 @@ ENV APP_DESTINATION_EXPLODED_WAR $APP_DESTINATION_PATH$APP_EXPLODED_WAR
 ENV APP_DESTINATION $APP_DESTINATION_WAR
 
 EXPOSE 8080
+ENTRYPOINT ["/docker-entrypoint.bash"]
 CMD ["java","-Djetty.base=${jetty.base}","-jar","${jetty.home}/start.jar"]
