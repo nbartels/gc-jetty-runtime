@@ -14,6 +14,13 @@
 
 FROM ${docker.openjdk.image}
 
+# install unzip with minimal bloat
+RUN apt-get update \
+ && apt-get -y upgrade \
+ && apt-get -y install --no-install-recommends unzip \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 # create jetty group and user
 RUN groupadd -r jetty \
  && useradd -r -g jetty jetty
