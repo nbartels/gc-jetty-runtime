@@ -85,8 +85,28 @@ fileExistenceTests:
   path: '${jetty.base}/webapps'
   isDirectory: true
   shouldExist: true
+- name: 'setup-env.d directory exists'
+  path: '/setup-env.d'
+  isDirectory: true
+  shouldExist: true
 - name: '50-jetty.bash exists'
   path: '/setup-env.d/50-jetty.bash'
+  isDirectory: false
+  shouldExist: true
+- name: '05-utils.bash exists'
+  path: '/setup-env.d/05-utils.bash'
+  isDirectory: false
+  shouldExist: true
+- name: 'shutdown directory exists'
+  path: '/shutdown'
+  isDirectory: true
+  shouldExist: true
+- name: 'shutdown-env.bash exists'
+  path: '/shutdown/shutdown-env.bash'
+  isDirectory: false
+  shouldExist: true
+- name: 'shutdown-wrapper.bash exists'
+  path: '/shutdown/shutdown-wrapper.bash'
   isDirectory: false
   shouldExist: true
 - name: 'gcloud lib exists'
