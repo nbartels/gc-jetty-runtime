@@ -27,7 +27,7 @@ import java.util.Arrays;
 /**
  * Checks whether the application deployed normally.
  */
-public class DeploymentCheck extends AbstractLifeCycle.AbstractLifeCycleListener {
+public class DeploymentCheck implements LifeCycle.Listener {
   @Override
   public void lifeCycleStarted(LifeCycle bean) {
     if (bean instanceof Server) {
