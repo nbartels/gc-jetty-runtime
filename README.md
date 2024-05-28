@@ -37,7 +37,7 @@ To update the server configuration in a derived Docker image, the `Dockerfile` m
 enable additional modules with `RUN` commands like:
 ```dockerfile
 WORKDIR $JETTY_BASE
-RUN java -jar "$JETTY_HOME/start.jar" --add-to-startd=jmx,stats
+RUN java -jar "$JETTY_HOME/start.jar" --add-module=jmx,stats
 ```
 Modules may be configured in a `Dockerfile` by editing the properties in the corresponding mod files in `/var/lib/jetty/start.d/` or the module can be deactivated by removing that file.
 
@@ -118,21 +118,21 @@ This image updates the docker `CMD` and adds the
 script to include options and arguments to run the Jetty container, unless an executable argument is passed to the docker image.
 Additional environment variables are used/set including:
 
-|Env Var           | Maven Prop      | Value/Comment                                        |
-|------------------|-----------------|------------------------------------------------------|
-|`JETTY_VERSION`   |`jetty9.version` |                                                      |
-|`GAE_IMAGE_NAME`  |                 |`jetty`                                               |
-|`GAE_IMAGE_LABEL` |`docker.tag.long`|                                                      |
-|`JETTY_HOME`      |`jetty.home`     |`/opt/jetty-home`                                     |
-|`JETTY_BASE`      |`jetty.base`     |`/var/lib/jetty`                                      |
-|`TMPDIR`          |                 |`/tmp/jetty`                                          |
-|`JETTY_PROPERTIES`|                 |Comma separated list of `name=value` pairs appended to `$JETTY_ARGS` |
-|`JETTY_MODULES_ENABLE`|            |Comma separated list of modules to enable by appending to `$JETTY_ARGS` |
-|`JETTY_MODULES_DISABLE`|           |Comma separated list of modules to disable by removing from `$JETTY_BASE/start.d` |
-|`JETTY_ARGS`      |                 |Arguments passed to jetty's `start.jar`. Any arguments used for custom jetty configuration should be passed here. |
-|`ROOT_WAR`        |                 |`$JETTY_BASE/webapps/root.war`                        |
-|`ROOT_DIR`        |                 |`$JETTY_BASE/webapps/root`                            |
-|`JAVA_OPTS`       |                 |JVM runtime arguments                                 |
+|Env Var           | Maven Prop        | Value/Comment                                        |
+|------------------|-------------------|------------------------------------------------------|
+|`JETTY_VERSION`   | `jetty10.version` |                                                      |
+|`GAE_IMAGE_NAME`  |                   |`jetty`                                               |
+|`GAE_IMAGE_LABEL` | `docker.tag.long` |                                                      |
+|`JETTY_HOME`      | `jetty.home`      |`/opt/jetty-home`                                     |
+|`JETTY_BASE`      | `jetty.base`      |`/var/lib/jetty`                                      |
+|`TMPDIR`          |                   |`/tmp/jetty`                                          |
+|`JETTY_PROPERTIES`|                   |Comma separated list of `name=value` pairs appended to `$JETTY_ARGS` |
+|`JETTY_MODULES_ENABLE`|                   |Comma separated list of modules to enable by appending to `$JETTY_ARGS` |
+|`JETTY_MODULES_DISABLE`|                   |Comma separated list of modules to disable by removing from `$JETTY_BASE/start.d` |
+|`JETTY_ARGS`      |                   |Arguments passed to jetty's `start.jar`. Any arguments used for custom jetty configuration should be passed here. |
+|`ROOT_WAR`        |                   |`$JETTY_BASE/webapps/root.war`                        |
+|`ROOT_DIR`        |                   |`$JETTY_BASE/webapps/root`                            |
+|`JAVA_OPTS`       |                   |JVM runtime arguments                                 |
 
 If a WAR file is found at `$ROOT_WAR`, it is unpacked to `$ROOT_DIR` if it is newer than the directory or the directory
 does not exist.  If there is no `$ROOT_WAR` or `$ROOT_DIR`, then `/app` is symbolic linked to `$ROOT_DIR`. If 

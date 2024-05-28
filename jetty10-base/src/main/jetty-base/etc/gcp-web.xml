@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+ 
+  <!-- Allow start exceptions to propagate -->
+  <Set name="throwUnavailableOnStartupException">true</Set>
+
+  <!-- Add listener to capture request context to be used by logging  -->
+  <Call name="addEventListener">
+    <Arg><New class="com.google.cloud.runtimes.jetty10.RequestContextScope"/></Arg>
+  </Call>
+
+  <!-- Protect app.yaml -->
+  <Get id="protected" name="ProtectedTargets"/>
+  <Set name="ProtectedTargets">
+    <Call class="org.eclipse.jetty.util.ArrayUtil" name="addToArray">
+      <Arg><Ref refid="protected"/></Arg>
+      <Arg>/app.yaml</Arg>
+      <Arg></Arg>
+    </Call>
+  </Set>
+
+  <Set name="overrideDescriptor"><Property name="jetty.base"/>/etc/gcp-override-web.xml</Set>
+ 
+</Configure>

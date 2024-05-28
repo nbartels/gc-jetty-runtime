@@ -1,0 +1,5 @@
+--create-start-d
+--approve-all-licenses
+--add-modules=server,webapp,http,deploy,jsp,jstl,resources,logging-jul,logging-jcl-capture
+
+

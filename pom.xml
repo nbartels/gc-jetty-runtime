@@ -30,13 +30,13 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.build.timestamp.format>yyyy-MM-dd-HH-mm</maven.build.timestamp.format>
     <gcloud.api.bom.version>0.133.0</gcloud.api.bom.version>
-    <jetty9.minor.version>4</jetty9.minor.version>
-    <jetty9.dot.version>51</jetty9.dot.version>
-    <jetty9.version>9.${jetty9.minor.version}.${jetty9.dot.version}.v20230217</jetty9.version>
-    <docker.tag.prefix></docker.tag.prefix>
-    <docker.tag.short>${docker.tag.prefix}9.${jetty9.minor.version}</docker.tag.short>
-    <docker.tag.long>${docker.tag.prefix}9.${jetty9.minor.version}-${maven.build.timestamp}</docker.tag.long>
-    <docker.openjdk.image>gcr.io/google-appengine/openjdk:8</docker.openjdk.image>
+    <jetty10.minor.version>0</jetty10.minor.version>
+    <jetty10.dot.version>21</jetty10.dot.version>
+    <jetty10.version>10.${jetty10.minor.version}.${jetty10.dot.version}</jetty10.version>
+    <docker.tag.prefix>fpk-</docker.tag.prefix>
+    <docker.tag.short>${docker.tag.prefix}${jetty10.version}</docker.tag.short>
+    <docker.tag.long>${docker.tag.prefix}${jetty10.version}-${maven.build.timestamp}</docker.tag.long>
+    <docker.openjdk.image>openjdk:21-slim-bookworm</docker.openjdk.image>
   </properties>
 
   <licenses>
@@ -48,8 +48,8 @@
   </licenses>
 
   <modules>
-    <module>jetty9-base</module>
-    <module>jetty9</module>
+    <module>jetty10-base</module>
+    <module>jetty10</module>
     <module>tests</module>
   </modules>
 
@@ -130,6 +130,14 @@
           <groupId>com.spotify</groupId>
           <artifactId>docker-maven-plugin</artifactId>
           <version>0.4.13</version>
+          <dependencies>
+            <dependency>
+              <groupId>javax.activation</groupId>
+              <artifactId>javax.activation-api</artifactId>
+              <version>1.2.0</version>
+              <scope>compile</scope>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
