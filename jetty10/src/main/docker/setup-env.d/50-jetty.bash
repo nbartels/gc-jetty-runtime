@@ -41,6 +41,9 @@ fi
 if [ "$JETTY_MODULES_ENABLE" ]; then
   for M in ${JETTY_MODULES_ENABLE//,/ }; do
     JETTY_ARGS="$JETTY_ARGS --module=$M"
+    if [[ "$M" == "gcp-datastore-sessions" ]]; then
+      JETTY_ARGS="$JETTY_ARGS --module=gcp-gcloud"
+    fi
   done
 fi
 
